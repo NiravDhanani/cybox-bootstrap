@@ -7,6 +7,18 @@ body {
   background-color: #0c1226;
   color: white;
   font-size: 17px;
+  /* Handle */
+  /* Handle on hover */
+}
+body::-webkit-scrollbar {
+  width: 7px;
+  background-color: #d9d9d9;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #14C2A3;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #18fcd2;
 }
 
 a {
@@ -18,13 +30,58 @@ a {
   height: 100vh;
   position: fixed;
   top: 0;
+  left: 0;
   justify-content: center;
   display: flex;
   align-items: center;
   z-index: 999999;
+  background-color: #141a31;
+}
+.loader .box-loader img {
+  width: 250px;
+}
+.loader .box-loader .line {
+  height: 3px;
+  width: 100%;
+  background: #e8e8e8;
+  margin-top: 30%;
+}
+.loader .box-loader .line .line2 {
+  width: 100%;
+  height: inherit;
+  background: #14C2A3;
+  animation: slide 2s ease-out infinite;
+}
+@keyframes slide {
+  0% {
+    transform-origin: left;
+    transform: scalex(0.1);
+  }
+  40% {
+    transform-origin: left;
+    transform: scalex(0.8);
+  }
+  100% {
+    transform-origin: left;
+    transform: scalex(1.1);
+  }
 }
 
 header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+  z-index: 10000000000000000000000000000;
+  padding: 20px 0;
+  text-align: center;
+  background: transparent;
+  transition: transform 0.5s ease;
+}
+
+.main-header {
   position: fixed;
   top: 0;
   left: 0;
@@ -34,17 +91,12 @@ header {
   z-index: 10;
   padding: 20px 0;
   text-align: center;
-  background: transparent;
+  background: #141a31;
   transition: transform 0.5s ease;
 }
 
-.hide-header2 {
-  background-color: #141a31;
-  z-index: 999999;
-}
-
-.hide-header {
-  transform: translateY(-100%);
+.scrolled {
+  top: 0;
 }
 
 .nav ul {
@@ -129,9 +181,13 @@ li .test:hover {
 
 .offcanvas {
   background-color: #141a31;
+  z-index: 11111111111111112;
 }
 .offcanvas img {
   width: 190px;
+}
+.offcanvas button {
+  background-color: white !important;
 }
 .offcanvas .offcanvas-body form input {
   background-color: transparent !important;
@@ -153,28 +209,26 @@ form ::placeholder {
 }
 
 /* =========button code pan plug in start======== */
+.head-btn {
+  /*----- button 6 -----*/
+}
 .head-btn button {
   display: inline-block;
   position: relative;
-  background: transparent;
-  border: 1px solid #14c2a3;
+  background: none;
+  border: none;
   color: #fff;
   font-size: 18px;
   cursor: pointer;
+  background: transparent;
+  border: 1px solid #14c2a3;
 }
-.head-btn button .head-btn1 {
+.head-btn span {
   display: block;
-  padding: 15px 20px;
+  padding: 10px 20px;
 }
-.head-btn button .head-btn1::before, .head-btn button .head-btn1::after {
-  content: "";
-  width: 0px;
-  height: 2px;
-  position: absolute;
-  border: 1px solid white;
-  transition: all 0.2s linear;
-}
-.head-btn button::before, .head-btn button::after {
+.head-btn button::before,
+.head-btn button::after {
   content: "";
   width: 0;
   height: 2px;
@@ -182,47 +236,50 @@ form ::placeholder {
   transition: all 0.2s linear;
   background: #fff;
 }
-.head-btn :hover::before,
-.head-btn :hover::after {
+.head-btn span::before,
+.head-btn span::after {
+  content: "";
+  width: 2px;
+  height: 0;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #fff;
+  margin: 0px -1px;
+}
+.head-btn button:hover::before,
+.head-btn button:hover::after {
   width: 100%;
 }
-
-button:hover .head-btn1::before,
-button:hover .head-btn1::after {
+.head-btn button:hover span::before,
+.head-btn button:hover span::after {
   height: 100%;
 }
-
-.btn-6::before {
+.head-btn .btn-6::before {
   left: 50%;
   top: 0;
   transition-duration: 0.4s;
 }
-
-.btn-6::after {
+.head-btn .btn-6::after {
   left: 50%;
   bottom: 0;
   transition-duration: 0.4s;
 }
-
-.btn-6 .head-btn1::before {
+.head-btn .btn-6 span::before {
   left: 0;
   top: 50%;
   transition-duration: 0.4s;
 }
-
-.btn-6 .head-btn1::after {
+.head-btn .btn-6 span::after {
   right: 0;
   top: 50%;
   transition-duration: 0.4s;
 }
-
-.btn-6:hover::before,
-.btn-6:hover::after {
+.head-btn .btn-6:hover::before,
+.head-btn .btn-6:hover::after {
   left: 0;
 }
-
-.btn-6:hover .head-btn1::before,
-.btn-6:hover .head-btn1::after {
+.head-btn .btn-6:hover span::before,
+.head-btn .btn-6:hover span::after {
   top: 0;
 }
 
@@ -230,6 +287,7 @@ button:hover .head-btn1::after {
   font-size: 40px;
   position: absolute;
   right: 50px;
+  top: 10px;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -243,18 +301,25 @@ button:hover .head-btn1::after {
   background-image: url("../img/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 100px;
 }
 .cybox-nft .nft-banner {
   position: relative;
-  padding: 80px 0;
+  padding: 0px 0 0 0;
+}
+.cybox-nft .nft-banner .nft-detail {
+  padding-top: 150px;
 }
 .cybox-nft .nft-banner .nft-detail h1 {
   font-size: 70px;
 }
-@media screen and (max-width: 991px) {
-  .cybox-nft .nft-banner .nft-detail h1 .nft-detail h1 {
+@media screen and (max-width: 1199px) {
+  .cybox-nft .nft-banner .nft-detail h1 {
     font-size: 40px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .cybox-nft .nft-banner .nft-detail h1 {
+    font-size: 50px;
   }
 }
 .cybox-nft .nft-banner .nft-detail p {
@@ -262,52 +327,98 @@ button:hover .head-btn1::after {
   color: #b9b9bf;
   font-family: "IBM Plex Mono";
 }
-.cybox-nft .nft-banner .cb-img {
-  position: absolute;
-  bottom: 0;
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 {
+  /*----- button 6 -----*/
+  color: white !important;
+  background-color: #14c2a3;
 }
-@media screen and (max-width: 991px) {
-  .cybox-nft .nft-banner .cb-img {
-    position: relative;
-  }
-}
-
-.nft-btn button {
-  /*nft section button*/
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 button {
   display: inline-block;
   position: relative;
   background: none;
-  /* border: 1px solid #14c2a3; */
+  border: none;
   color: #fff;
-  padding: 10px 15px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
-  background: #14c2a3;
-  transition: all 0.5s;
-}
-
-.nft-btn button:hover {
-  color: #14c2a3;
-  background: #fff;
-}
-
-.nft-btn button span {
-  font-weight: 600;
-}
-
-.video {
-  /*nft btn-2 button*/
-  margin-left: 5px;
-  padding: 10px 15px;
-  background-color: transparent !important;
+  background: transparent;
   border: 1px solid #14c2a3;
 }
-
-.video:hover {
-  background-color: #14c2a3 !important;
-  color: #fff !important;
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 span {
+  display: block;
+  padding: 10px 20px;
 }
-
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 button::before,
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 button::after {
+  content: "";
+  width: 0;
+  height: 2px;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #fff;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 span::before,
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 span::after {
+  content: "";
+  width: 2px;
+  height: 0;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #fff;
+  margin: 0px -1px;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 button:hover::before,
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 button:hover::after {
+  width: 100%;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 button:hover span::before,
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 button:hover span::after {
+  height: 100%;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 .btn-6::before {
+  left: 50%;
+  top: 0;
+  transition-duration: 0.4s;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 .btn-6::after {
+  left: 50%;
+  bottom: 0;
+  transition-duration: 0.4s;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 .btn-6 span::before {
+  left: 0;
+  top: 50%;
+  transition-duration: 0.4s;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 .btn-6 span::after {
+  right: 0;
+  top: 50%;
+  transition-duration: 0.4s;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 .btn-6:hover::before,
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 .btn-6:hover::after {
+  left: 0;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 .btn-6:hover span::before,
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61 .btn-6:hover span::after {
+  top: 0;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .btn-61:hover {
+  color: #14c2a3 !important;
+  background: #fff;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .video {
+  /*nft btn-2 button*/
+  background-color: transparent !important;
+  border: 1px solid #14c2a3;
+  color: #fff !important;
+  padding: 10px 20px;
+}
+.cybox-nft .nft-banner .nft-detail .nft-btn .video:hover {
+  background-color: #14c2a3 !important;
+}
+.cybox-nft .nft-banner .cb-img {
+  bottom: 0;
+}
 .about-us {
   padding: 50px 0;
 }
@@ -343,7 +454,7 @@ button:hover .head-btn1::after {
   cursor: pointer;
   position: relative;
 }
-.about-us .about .ico .icons :hover {
+.about-us .about .ico .icons:hover {
   box-shadow: 2px 2px 20px 0px #14c2a3;
 }
 .about-us .about .ico .icons span {
@@ -357,7 +468,7 @@ button:hover .head-btn1::after {
   position: relative;
   z-index: 2;
 }
-.about-us .about .ico .icons span :hover {
+.about-us .about .ico .icons span:hover {
   box-shadow: none;
 }
 .about-us .about .ico .icons span i {
@@ -390,13 +501,12 @@ button:hover .head-btn1::after {
   transition: all 1s;
   z-index: 1;
 }
-.about-us .about .ico .icons span:hover::after,
-.about-us .about .ico .icons span:hover::before {
+.about-us .about .ico .icons span:hover::after, .about-us .about .ico .icons span:hover::before {
   width: 50%;
   height: 50%;
   border-color: #14c2a3;
 }
-.about-us .about .icons::after {
+.about-us .about .ico .icons::after {
   position: absolute;
   content: "";
   box-sizing: border-box;
@@ -409,7 +519,7 @@ button:hover .head-btn1::after {
   transition: all 1s;
   z-index: 1;
 }
-.about-us .about .icons::before {
+.about-us .about .ico .icons::before {
   position: absolute;
   content: "";
   box-sizing: border-box;
@@ -422,10 +532,7 @@ button:hover .head-btn1::after {
   transition: all 1s;
   z-index: 1;
 }
-.about-us .about .iclass:hover::after,
-.about-us .about .iclass:hover::before,
-.about-us .about .icons:hover::after,
-.about-us .about .icons:hover::before {
+.about-us .about .ico .icons:hover::after, .about-us .about .ico .icons:hover::before {
   width: 50%;
   height: 50%;
   border-color: #14c2a3;
@@ -441,12 +548,74 @@ button:hover .head-btn1::after {
 .about-us .about-content .content-one :hover {
   box-shadow: 2px 2px 20px 0px #14c2a3;
 }
+.about-us .about-content .content-one::after {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15%;
+  height: 15%;
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid #195051;
+  border-right: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.about-us .about-content .content-one::before {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15%;
+  height: 15%;
+  top: 0;
+  left: 0;
+  border-top: 2px solid #195051;
+  border-left: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.about-us .about-content .content-one:hover::after, .about-us .about-content .content-one:hover::before {
+  width: 50%;
+  height: 50%;
+  border-color: #14c2a3;
+}
 .about-us .about-content .content-one .content-two {
   transition: all 2s;
   position: relative;
   padding: 10px 15px;
   z-index: 2;
   margin: 20px 0;
+}
+.about-us .about-content .content-one .content-two::after {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15%;
+  height: 15%;
+  top: 0;
+  right: 0;
+  border-top: 2px solid #195051;
+  border-right: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.about-us .about-content .content-one .content-two::before {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15%;
+  height: 15%;
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid #195051;
+  border-left: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.about-us .about-content .content-one .content-two:hover::after, .about-us .about-content .content-one .content-two:hover::before {
+  width: 50%;
+  height: 50%;
+  border-color: #14c2a3;
 }
 .about-us .about-content .content-one .content-two :hover {
   box-shadow: none;
@@ -460,74 +629,19 @@ button:hover .head-btn1::after {
   font-family: "IBM Plex Mono";
   color: #b9b9bf;
 }
-.about-us .about-content .content-one .content-two::after {
-  position: absolute;
-  content: "";
-  width: 5%;
-  height: 20%;
-  bottom: 0;
-  right: 0;
-  border-bottom: 2px solid #195051;
-  border-right: 2px solid #195051;
-  transition: all 1s;
-  z-index: 1;
-}
-.about-us .about-content .content-one .content-two::before {
-  position: absolute;
-  content: "";
-  box-sizing: border-box;
-  width: 5%;
-  height: 20%;
-  top: 0;
-  left: 0;
-  border-top: 2px solid #195051;
-  border-left: 2px solid #195051;
-  transition: all 1s;
-  z-index: 1;
-}
-.about-us .about-content .content-one .content-two:hover::after,
-.about-us .about-content .content-one .content-two:hover::before {
-  width: 50%;
-  height: 50%;
-  border-color: #14c2a3;
-}
-.about-us .about-content .content-one::after {
-  position: absolute;
-  content: "";
-  box-sizing: border-box;
-  width: 5%;
-  height: 20%;
-  top: 0;
-  right: 0;
-  border-top: 2px solid #195051;
-  border-right: 2px solid #195051;
-  transition: all 1s;
-  z-index: 1;
-}
-.about-us .about-content .content-one::before {
-  position: absolute;
-  content: "";
-  box-sizing: border-box;
-  width: 5%;
-  height: 20%;
-  bottom: 0;
-  left: 0;
-  border-bottom: 2px solid #195051;
-  border-left: 2px solid #195051;
-  transition: all 1s;
-  z-index: 1;
-}
-.about-us .about-content .content-one:hover::after,
-.about-us .about-content .content-one:hover::before {
-  width: 50%;
-  height: 50%;
-  border-color: #14c2a3;
-}
 
 .road-map {
   background-image: url("../img/bg-timeline.png");
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: visible;
+  scrollbar-width: thin;
+  scrollbar-color: transparent;
+}
+.road-map::-webkit-scrollbar {
+  display: none;
 }
 .road-map .road-top p {
   color: #14c2a3;
@@ -536,20 +650,11 @@ button:hover .head-btn1::after {
   padding-bottom: 20px;
 }
 .road-map .road-bg .roadmap-bar {
-  overflow: auto;
-  height: 100%;
-}
-.road-map .road-bg .roadmap-bar .road-map2 {
   position: relative;
-  overflow: auto;
-  margin: 10px 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
+  height: 100%;
   margin: 0 auto;
 }
-.road-map .road-bg .roadmap-bar .road-map2::after {
+.road-map .road-bg .roadmap-bar::after {
   position: absolute;
   content: "";
   width: 6px;
@@ -560,17 +665,31 @@ button:hover .head-btn1::after {
   translate: transformx(-50%);
 }
 @media screen and (max-width: 991px) {
-  .road-map .road-bg .roadmap-bar .road-map2::after {
+  .road-map .road-bg .roadmap-bar::after {
     left: 0px;
   }
 }
-.road-map .road-bg .roadmap-bar .road-map2 #rm-b0 {
-  margin-top: 200px;
+.road-map .road-bg .roadmap-bar #right-road {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 150px;
+}
+@media screen and (max-width: 991px) {
+  .road-map .road-bg .roadmap-bar #right-road {
+    justify-content: flex-start;
+  }
+}
+.road-map .road-bg .roadmap-bar .road-map2 {
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 {
   position: relative;
   z-index: 1;
-  margin: 20px 0 0 0;
+  margin: 120px 0 0 0;
   background-color: #0e2230;
 }
 @media screen and (max-width: 991px) {
@@ -603,26 +722,26 @@ button:hover .head-btn1::after {
   content: "";
   box-sizing: border-box;
   width: 5%;
-  height: 50%;
+  height: 100%;
   top: 0;
   right: 0;
   border-top: 2px solid #195051;
   border-right: 2px solid #195051;
   transition: all 1s;
-  z-index: 3;
+  z-index: 9999999;
 }
 .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box::before {
   position: absolute;
   content: "";
   box-sizing: border-box;
   width: 5%;
-  height: 50%;
+  height: 100%;
   bottom: 0;
   left: 0;
   border-bottom: 2px solid #195051;
   border-left: 2px solid #195051;
   transition: all 1s;
-  z-index: 3;
+  z-index: 9999999;
 }
 .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box:hover::after, .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box:hover::before {
   width: 50%;
@@ -652,6 +771,11 @@ button:hover .head-btn1::after {
 @media screen and (max-width: 1390px) {
   .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box .left::after {
     left: 545px;
+  }
+}
+@media screen and (max-width: 1177px) {
+  .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box .left::after {
+    left: 450px;
   }
 }
 @media screen and (max-width: 1170px) {
@@ -685,10 +809,16 @@ button:hover .head-btn1::after {
     width: 160px;
   }
 }
-@media screen and (max-width: 1170px) {
+@media screen and (max-width: 1177px) {
   .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box .left::before {
-    left: 400px;
-    width: 60px;
+    left: 390px;
+    width: 80px;
+  }
+}
+@media screen and (max-width: 1173px) {
+  .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box .left::before {
+    left: 390px;
+    width: 80px;
   }
 }
 @media screen and (max-width: 991px) {
@@ -724,6 +854,11 @@ button:hover .head-btn1::after {
     left: -170px;
   }
 }
+@media screen and (max-width: 1177px) {
+  .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box .right::after {
+    left: -85px;
+  }
+}
 @media screen and (max-width: 1170px) {
   .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box .right::after {
     left: -85px;
@@ -747,6 +882,12 @@ button:hover .head-btn1::after {
   .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box .right::before {
     left: -170px;
     width: 42%;
+  }
+}
+@media screen and (max-width: 1177px) {
+  .road-map .road-bg .roadmap-bar .road-map2 .rm-box0 .rm-box .right::before {
+    left: -85px;
+    width: 21%;
   }
 }
 @media screen and (max-width: 1170px) {
@@ -774,20 +915,20 @@ button:hover .head-btn1::after {
   content: "";
   box-sizing: border-box;
   width: 5%;
-  height: 50%;
+  height: 100%;
   top: 0;
   left: 0;
   border-top: 2px solid #195051;
   border-left: 2px solid #195051;
   transition: all 1s;
-  z-index: 2;
+  z-index: 3;
 }
 .road-map .road-bg .roadmap-bar .road-map2 .rm-box0::before {
   position: absolute;
   content: "";
   box-sizing: border-box;
   width: 5%;
-  height: 50%;
+  height: 100%;
   bottom: 0;
   right: 0;
   border-bottom: 2px solid #195051;
@@ -799,10 +940,6 @@ button:hover .head-btn1::after {
   width: 50%;
   height: 50%;
   border-color: #14c2a3;
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
 
 .member {
@@ -830,6 +967,37 @@ button:hover .head-btn1::after {
   position: relative;
   z-index: 2;
 }
+.member .setup-1::after {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15%;
+  height: 15%;
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid #195051;
+  border-right: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.member .setup-1::before {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15%;
+  height: 15%;
+  top: 0;
+  left: 0;
+  border-top: 2px solid #195051;
+  border-left: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.member .setup-1:hover::after, .member .setup-1:hover::before {
+  width: 50%;
+  height: 50%;
+  border-color: #14c2a3;
+}
 .member .setup-1 :hover {
   box-shadow: 3px 3px 20px 0px #14c2a3;
 }
@@ -839,6 +1007,37 @@ button:hover .head-btn1::after {
   padding: 20px 15px;
   margin: 10px 0;
   z-index: 2;
+}
+.member .setup-1 .setup-2::after {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15%;
+  height: 15%;
+  top: 0;
+  right: 0;
+  border-top: 2px solid #195051;
+  border-right: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.member .setup-1 .setup-2::before {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15%;
+  height: 15%;
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid #195051;
+  border-left: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.member .setup-1 .setup-2:hover::after, .member .setup-1 .setup-2:hover::before {
+  width: 50%;
+  height: 50%;
+  border-color: #14c2a3;
 }
 .member .setup-1 .setup-2 :hover {
   box-shadow: none;
@@ -858,70 +1057,6 @@ button:hover .head-btn1::after {
 .member .setup-1 .setup-2 p {
   font-family: "IBM Plex Mono";
   color: #b9b9bf;
-}
-.member .setup-1 .setup-2::after {
-  position: absolute;
-  content: "";
-  box-sizing: border-box;
-  width: 15%;
-  height: 15%;
-  bottom: 0;
-  right: 0;
-  border-bottom: 2px solid #195051;
-  border-right: 2px solid #195051;
-  transition: all 1s;
-  z-index: 1;
-}
-.member .setup-1 .setup-2::before {
-  position: absolute;
-  content: "";
-  box-sizing: border-box;
-  width: 15%;
-  height: 15%;
-  top: 0;
-  left: 0;
-  border-top: 2px solid #195051;
-  border-left: 2px solid #195051;
-  transition: all 1s;
-  z-index: 1;
-}
-.member .setup-1 .setup-2:hover::after,
-.member .setup-1 .setup-2:hover::before {
-  width: 50%;
-  height: 50%;
-  border-color: #14c2a3;
-}
-.member .setup-1::after {
-  position: absolute;
-  content: "";
-  box-sizing: border-box;
-  width: 15%;
-  height: 15%;
-  top: 0;
-  right: 0;
-  border-top: 2px solid #195051;
-  border-right: 2px solid #195051;
-  transition: all 1s;
-  z-index: 1;
-}
-.member .setup-1::before {
-  position: absolute;
-  content: "";
-  box-sizing: border-box;
-  width: 15%;
-  height: 15%;
-  bottom: 0;
-  left: 0;
-  border-bottom: 2px solid #195051;
-  border-left: 2px solid #195051;
-  transition: all 1s;
-  z-index: 1;
-}
-.member .setup-1:hover::after,
-.member .setup-1:hover::before {
-  width: 50%;
-  height: 50%;
-  border-color: #14c2a3;
 }
 
 .our-team {
@@ -957,20 +1092,25 @@ button:hover .head-btn1::after {
 }
 .blog .news .img-1 {
   width: 95%;
-  height: 550px;
-  background-image: url("../img/post-7-450x580.jpg");
+  margin: 0 10px;
   background-repeat: no-repeat;
   background-size: cover;
   border: 1px solid #195051;
   margin: 0 10px;
+}
+.blog .news .img-1 .bg-img {
+  z-index: -111;
   transition: all 0.5s;
-  overflow: hidden;
+}
+.blog .news .img-1 .bg-img:hover {
+  transform: scale(1.09);
 }
 .blog .news .img-1 button {
   background-color: #14c2a3;
   margin: 10px 15px;
   color: white;
   border: 1px solid transparent;
+  z-index: 999999;
 }
 .blog .news .img-1 .content01 {
   -webkit-backdrop-filter: blur(30px);
@@ -993,6 +1133,11 @@ button:hover .head-btn1::after {
     font-size: 20px;
   }
 }
+@media screen and (max-width: 575PX) {
+  .blog .news .img-1 .content01 h3 {
+    font-size: 14PX;
+  }
+}
 .blog .news .img-1 .content01 h3:hover {
   color: #14c2a3;
 }
@@ -1001,37 +1146,26 @@ button:hover .head-btn1::after {
   color: #b9b9bf;
   padding: 0 10px 30px;
 }
-.blog .news .img-1:hover {
-  transform: scale(1.03);
-}
-.blog .news #img2 {
-  background-image: url("../img/post-8-450x580.jpg");
-}
-.blog .news #img3 {
-  background-image: url("../img/post-5-450x580.jpg");
+.blog .end-btn {
+  /*----- button 6 -----*/
 }
 .blog .end-btn button {
   display: inline-block;
   position: relative;
-  background: transparent;
-  border: 1px solid #14c2a3;
+  background: none;
+  border: none;
   color: #fff;
   font-size: 18px;
   cursor: pointer;
+  background: transparent;
+  border: 1px solid #14c2a3;
 }
-.blog .end-btn button .head-btn1 {
+.blog .end-btn span {
   display: block;
-  padding: 15px 20px;
+  padding: 10px 20px;
 }
-.blog .end-btn button .head-btn1::before, .blog .end-btn button .head-btn1::after {
-  content: "";
-  width: 0px;
-  height: 2px;
-  position: absolute;
-  border: 1px solid white;
-  transition: all 0.2s linear;
-}
-.blog .end-btn button::before, .blog .end-btn button::after {
+.blog .end-btn button::before,
+.blog .end-btn button::after {
   content: "";
   width: 0;
   height: 2px;
@@ -1039,12 +1173,22 @@ button:hover .head-btn1::after {
   transition: all 0.2s linear;
   background: #fff;
 }
-.blog .end-btn :hover::before,
-.blog .end-btn :hover::after {
+.blog .end-btn span::before,
+.blog .end-btn span::after {
+  content: "";
+  width: 2px;
+  height: 0;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #fff;
+  margin: 0px -1px;
+}
+.blog .end-btn button:hover::before,
+.blog .end-btn button:hover::after {
   width: 100%;
 }
-.blog .end-btn button:hover .head-btn1::before,
-.blog .end-btn button:hover .head-btn1::after {
+.blog .end-btn button:hover span::before,
+.blog .end-btn button:hover span::after {
   height: 100%;
 }
 .blog .end-btn .btn-6::before {
@@ -1057,12 +1201,12 @@ button:hover .head-btn1::after {
   bottom: 0;
   transition-duration: 0.4s;
 }
-.blog .end-btn .btn-6 .head-btn1::before {
+.blog .end-btn .btn-6 span::before {
   left: 0;
   top: 50%;
   transition-duration: 0.4s;
 }
-.blog .end-btn .btn-6 .head-btn1::after {
+.blog .end-btn .btn-6 span::after {
   right: 0;
   top: 50%;
   transition-duration: 0.4s;
@@ -1071,8 +1215,8 @@ button:hover .head-btn1::after {
 .blog .end-btn .btn-6:hover::after {
   left: 0;
 }
-.blog .end-btn .btn-6:hover .head-btn1::before,
-.blog .end-btn .btn-6:hover .head-btn1::after {
+.blog .end-btn .btn-6:hover span::before,
+.blog .end-btn .btn-6:hover span::after {
   top: 0;
 }
 
@@ -1117,95 +1261,98 @@ button:hover .head-btn1::after {
   margin: 30px auto 20px;
   border-radius: 4px;
   padding: 10px 0;
+  z-index: 1;
 }
-.faqs .accordion .test-2 {
-  transition: all 2s;
-  position: relative;
-  z-index: 2;
-}
-.faqs .accordion .test-2:hover {
-  box-shadow: 2px 2px 10px #14c2a3;
-}
-.faqs .accordion .test-2::after {
-  position: absolute;
-  content: "";
-  width: 5%;
-  height: 20%;
-  bottom: 0;
-  right: 0;
-  border-bottom: 2px solid #195051;
-  border-right: 2px solid #195051;
-  transition: all 1s;
-  z-index: 3;
-}
-.faqs .accordion .test-2::before {
-  position: absolute;
-  content: "";
-  box-sizing: border-box;
-  width: 5%;
-  height: 20%;
-  top: 0;
-  left: 0;
-  border-top: 2px solid #195051;
-  border-left: 2px solid #195051;
-  transition: all 1s;
-  z-index: 9999;
-}
-.faqs .accordion .test-2:hover::after, .faqs .accordion .test-2:hover::before {
-  width: 50%;
-  height: 50%;
-  border-color: #14c2a3;
-}
-.faqs .accordion .test-2 .accordion-item {
+.faqs .accordion .accordion-item {
   margin: 20px 0;
   background-color: #0e2230;
   transition: all 1s;
-  z-index: 2;
+  z-index: 10000000000000000000000000;
   cursor: pointer;
   position: relative;
 }
-.faqs .accordion .test-2 .accordion-item h2 button {
-  padding: 15px 10px;
-  font-size: 24px;
-  color: white;
-  border: 1px solid transparent;
-  background-color: #0e2230;
+.faqs .accordion .accordion-item:hover {
+  box-shadow: 2px 2px 10px #14c2a3;
 }
-.faqs .accordion .test-2 .accordion-item::after {
+.faqs .accordion .accordion-item::after {
   position: absolute;
   content: "";
   box-sizing: border-box;
-  width: 5%;
-  height: 20%;
+  width: 15px;
+  height: 15px;
   top: 0;
   right: 0;
   border-top: 2px solid #195051;
   border-right: 2px solid #195051;
   transition: all 1s;
-  z-index: 3;
+  z-index: 1;
 }
-.faqs .accordion .test-2 .accordion-item::before {
+.faqs .accordion .accordion-item::before {
   position: absolute;
   content: "";
   box-sizing: border-box;
-  width: 5%;
-  height: 20%;
+  width: 15px;
+  height: 15px;
   bottom: 0;
   left: 0;
   border-bottom: 2px solid #195051;
   border-left: 2px solid #195051;
   transition: all 1s;
-  z-index: 3;
+  z-index: 1;
 }
-.faqs .accordion .test-2 .accordion-item:hover::after, .faqs .accordion .test-2 .accordion-item:hover::before {
+.faqs .accordion .accordion-item:hover::after, .faqs .accordion .accordion-item:hover::before {
   width: 50%;
   height: 50%;
   border-color: #14c2a3;
 }
-.faqs .accordion .test-2 .accordion-collapse .accordion-body {
+.faqs .accordion .accordion-item .testing {
+  position: relative;
+}
+.faqs .accordion .accordion-item .testing::after {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15px;
+  height: 15px;
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid #195051;
+  border-right: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.faqs .accordion .accordion-item .testing::before {
+  position: absolute;
+  content: "";
+  box-sizing: border-box;
+  width: 15px;
+  height: 15px;
+  top: 0;
+  left: 0;
+  border-top: 2px solid #195051;
+  border-left: 2px solid #195051;
+  transition: all 1s;
+  z-index: 1;
+}
+.faqs .accordion .accordion-item .testing:hover::after, .faqs .accordion .accordion-item .testing:hover::before {
+  width: 50%;
+  height: 50%;
+  border-color: #14c2a3;
+}
+.faqs .accordion .accordion-item h2 button {
+  font-size: 24px;
+  color: white;
+  border: 1px solid transparent;
+  background-color: transparent;
+  z-index: 2;
+}
+.faqs .accordion .accordion-item h2 button :focus {
+  border: none;
+}
+.faqs .accordion .accordion-collapse .accordion-body {
   background-color: #0e2230;
 }
-.faqs .accordion .test-2 .accordion-collapse .accordion-body p {
+.faqs .accordion .accordion-collapse .accordion-body p {
   color: #b9b9bf;
 }
 
@@ -1265,10 +1412,18 @@ button:hover .head-btn1::after {
   color: #14c2a3;
 }
 
+footer .data {
+  padding: 5px 0;
+}
 footer .data .left1 p {
   font-size: 17px;
-  padding: 10px 0;
+  margin: 0;
+  line-height: 2;
   color: #b9b9bf;
+}
+footer .data .right1 ul {
+  margin: 0;
+  line-height: 2;
 }
 footer .data .right1 ul li {
   padding: 0 5px;
@@ -1290,23 +1445,27 @@ footer .data a {
   width: 50px;
   height: 50px;
   text-align: center;
-  border-radius: 50%;
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 40px;
+  right: 0px;
   transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
   opacity: 0;
   visibility: hidden;
   z-index: 1000;
 }
 
+#button i {
+  font-size: 20px;
+  text-align: center;
+  padding: 15px 10px;
+}
+
 #button::after {
-  content: "\f077";
+  content: "";
   font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
   font-size: 2em;
-  line-height: 50px;
 }
 
 #button:hover {
@@ -1324,8 +1483,5 @@ footer .data a {
 @media (min-width: 500px) {
   .content {
     width: 43%;
-  }
-  #button {
-    margin: 30px;
   }
 }/*# sourceMappingURL=style.css.map */

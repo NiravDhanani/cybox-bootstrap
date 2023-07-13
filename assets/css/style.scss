@@ -31,21 +31,166 @@ $fw-300: 300;
 $fw-500: 500;
 $fw-600: 600;
 
-@media (min-width:1400px) {}
-
-@media (max-width:1199px) {}
-
-@media (max-width:991px) {
-    $fs-36: 30px;
-    $fs-44: 30px;
-    $fs-56: 36px;
-    $fs-70: 44px;
-}
-
-@media (max-width:767px) {}
-
 .bg-color {
     background-color: #14c2a3;
+}
+
+@mixin btn-6 {
+    button {
+        display: inline-block;
+        position: relative;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+        background: transparent;
+        border: 1px solid $primary-color;
+    }
+
+    span {
+        display: block;
+        padding: 10px 20px;
+
+    }
+
+    button::before,
+    button::after {
+        content: "";
+        width: 0;
+        height: 2px;
+        position: absolute;
+        transition: all 0.2s linear;
+        background: #fff;
+    }
+
+    span::before,
+    span::after {
+        content: "";
+        width: 2px;
+        height: 0;
+        position: absolute;
+        transition: all 0.2s linear;
+        background: #fff;
+        margin: 0px -1px;
+    }
+
+    button:hover::before,
+    button:hover::after {
+        width: 100%;
+    }
+
+    button:hover span::before,
+    button:hover span::after {
+        height: 100%;
+    }
+
+    /*----- button 6 -----*/
+    .btn-6::before {
+        left: 50%;
+        top: 0;
+        transition-duration: 0.4s;
+    }
+
+    .btn-6::after {
+        left: 50%;
+        bottom: 0;
+        transition-duration: 0.4s;
+    }
+
+    .btn-6 span::before {
+        left: 0;
+        top: 50%;
+        transition-duration: 0.4s;
+    }
+
+    .btn-6 span::after {
+        right: 0;
+        top: 50%;
+        transition-duration: 0.4s;
+    }
+
+    .btn-6:hover::before,
+    .btn-6:hover::after {
+        left: 0;
+    }
+
+    .btn-6:hover span::before,
+    .btn-6:hover span::after {
+        top: 0;
+    }
+}
+@mixin bf-hover{
+    &::after {
+        position: absolute;
+        content: '';
+        box-sizing: border-box;
+        width: 15%;
+        height: 15%;
+        top: 0;
+        right: 0;
+        border-top: 2px solid $border-1-color;
+        border-right: 2px solid $border-1-color;
+        transition: all 1s;
+        z-index: 1;
+    }
+    &::before {
+        position: absolute;
+        content: '';
+        box-sizing: border-box;
+        width: 15%;
+        height: 15%;
+        bottom: 0;
+        left: 0;
+        border-bottom: 2px solid $border-1-color;
+        border-left: 2px solid $border-1-color;
+        transition: all 1s;
+        z-index: 1;
+    }
+    &:hover::after,
+    &:hover::before {
+    width: 50%;
+    height: 50%;
+    border-color: $primary-color;
+
+}
+}
+@mixin af-hover{
+    &::after {
+        position: absolute;
+        content: '';
+        box-sizing: border-box;
+        width: 15%;
+        height: 15%;
+        bottom: 0;
+        right: 0;
+        border-bottom: 2px solid $border-1-color;
+        border-right: 2px solid $border-1-color;
+        transition: all 1s;
+        z-index: 1;
+    }
+
+    &::before {
+        position: absolute;
+        content: '';
+        box-sizing: border-box;
+        width: 15%;
+        height: 15%;
+        top: 0;
+        left: 0;
+        border-top: 2px solid $border-1-color;
+        border-left: 2px solid $border-1-color;
+        transition: all 1s;
+        z-index: 1;
+    }
+
+    &:hover::after,
+    &:hover::before{
+        width: 50%;
+        height: 50%;
+        border-color: $primary-color;
+
+    }
 }
 
 body {
@@ -53,6 +198,20 @@ body {
     background-color: #0c1226;
     color: white;
     font-size: $fs-17;
+    &::-webkit-scrollbar {
+        width: 7px;
+        background-color: #d9d9d9;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background-color: #14C2A3;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #18fcd2;
+    }
 }
 
 a {
@@ -64,14 +223,64 @@ a {
     height: 100vh;
     position: fixed;
     top: 0;
+    left: 0;
     justify-content: center;
     display: flex;
     align-items: center;
     z-index: 999999;
+    background-color: $header-bg;
+   .box-loader{
+    img{
+        width:250px;
+    }
+    .line{
+        height: 3px;
+        width: 100%;
+        background: #e8e8e8;
+        margin-top: 30%;
+        
+        .line2{
+          width: 100%;
+          height: inherit;
+          background: #14C2A3;
+          animation: slide 2s ease-out infinite;
+        }
+      }
+      
+      @keyframes slide{
+        0%{
+          transform-origin: left;
+          transform: scalex(0.1);
+        }
+        40%{
+          transform-origin: left;
+          transform: scalex(0.8);
+        }
+        100%{
+          transform-origin: left;
+          transform: scalex(1.1);
+        }
+      }
 }
+   }
+    
 
 // menu start =========
 header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    z-index: 9999999999999999999999999990;
+    padding: 20px 0;
+    text-align: center;
+    background: transparent;
+    transition: transform 0.5s ease;
+}
+.main-header{
+    // background-color: $header-bg;
     position: fixed;
     top: 0;
     left: 0;
@@ -81,18 +290,14 @@ header {
     z-index: 10;
     padding: 20px 0;
     text-align: center;
-    background: transparent;
+    background: $header-bg;
     transition: transform 0.5s ease;
+  
 }
-
-.hide-header2 {
-    background-color: $header-bg;
-    z-index: 999999;
+.scrolled {
+    top: 0;
 }
-
-.hide-header {
-    transform: translateY(-100%);
-}
+  
 
 .nav ul {
     margin: 0;
@@ -148,7 +353,6 @@ li .test:hover {
     transform: rotate(180deg);
 }
 
-
 .nav ul li>ul {
     display: none;
     position: absolute;
@@ -173,27 +377,23 @@ li .test:hover {
     background: $primary-color;
     color: $white-color;
     border-radius: 5px;
-
-
 }
 
 .nav ul li>ul li a {
     display: block;
     color: black;
-
 }
-
-
-
-//   .nav ul li.active a {
-//     //  background: white;
-//   }
 
 .offcanvas {
     background-color: $header-bg;
+    z-index: 11111111111111111;
 
     img {
         width: 190px;
+    }
+
+    button {
+        background-color: white!important;
     }
 
     .offcanvas-body {
@@ -209,8 +409,6 @@ li .test:hover {
     }
 }
 
-
-
 form {
     input {
         outline: none;
@@ -224,89 +422,8 @@ form {
 }
 
 /* =========button code pan plug in start======== */
-
 .head-btn {
-    button {
-        display: inline-block;
-        position: relative;
-        background: transparent;
-        border: 1px solid $primary-color;
-        color: #fff;
-        font-size: 18px;
-        cursor: pointer;
-
-        // margin: 20px 30px;
-        // background: rgba(0,0,0,0.09);
-        .head-btn1 {
-            display: block;
-            padding: 15px 20px;
-
-            &::before,
-            &::after {
-                content: "";
-                width: 0px;
-                height: 2px;
-                position: absolute;
-                border: 1px solid white;
-                transition: all 0.2s linear;
-                // background: #fff;
-            }
-        }
-
-        &::before,
-        &::after {
-            content: "";
-            width: 0;
-            height: 2px;
-            position: absolute;
-            transition: all 0.2s linear;
-            background: #fff;
-        }
-    }
-
-    :hover::before,
-    :hover::after {
-        width: 100%;
-    }
-}
-
-button:hover .head-btn1::before,
-button:hover .head-btn1::after {
-    height: 100%;
-}
-
-.btn-6::before {
-    left: 50%;
-    top: 0;
-    transition-duration: 0.4s;
-}
-
-.btn-6::after {
-    left: 50%;
-    bottom: 0;
-    transition-duration: 0.4s;
-}
-
-.btn-6 .head-btn1::before {
-    left: 0;
-    top: 50%;
-    transition-duration: 0.4s;
-}
-
-.btn-6 .head-btn1::after {
-    right: 0;
-    top: 50%;
-    transition-duration: 0.4s;
-}
-
-.btn-6:hover::before,
-.btn-6:hover::after {
-    left: 0;
-}
-
-.btn-6:hover .head-btn1::before,
-.btn-6:hover .head-btn1::after {
-    top: 0;
+    @include btn-6
 }
 
 .toggle {
@@ -314,6 +431,7 @@ button:hover .head-btn1::after {
         font-size: 40px;
         position: absolute;
         right: 50px;
+        top: 10px;
     }
 }
 
@@ -329,23 +447,23 @@ button:hover .head-btn1::after {
     background-image: url('../img/bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    padding-top: 100px;
+    // padding-top: 100px;
 
     // height: 100vh;
     .nft-banner {
         position: relative;
-        padding: 80px 0;
+        padding: 0px 0 0 0;
 
         .nft-detail {
+            padding-top:150px ;
             h1 {
                 font-size: 70px;
 
+                @media screen and (max-width:1199px) {
+                    font-size: 40px;
+                }
                 @media screen and (max-width:991px) {
-                    .nft-detail {
-                        h1 {
-                            font-size: 40px;
-                        }
-                    }
+                    font-size: 50px;
                 }
 
             }
@@ -355,16 +473,41 @@ button:hover .head-btn1::after {
                 color: $text-color;
                 font-family: $ibm;
             }
+
+            .nft-btn {
+                .btn-61 {
+                    @include btn-6;
+                    color: white !important;
+                    background-color: $primary-color;
+
+                    &:hover {
+                        color: #14c2a3 !important;
+                        background: #fff;
+                    }
+                }
+
+                .video {
+                    /*nft btn-2 button*/
+                    background-color: transparent !important;
+                    border: 1px solid $primary-color;
+                    color: #fff !important;
+                    padding: 10px 20px;
+
+                    &:hover {
+                        background-color: #14c2a3 !important;
+                    }
+                }
+            }
         }
 
         .cb-img {
-            position: absolute;
+            // position: absolute;
             bottom: 0;
 
             // right: -50px;
             @media screen and (max-width:991px) {
 
-                position: relative;
+                // position: relative;
 
             }
 
@@ -372,44 +515,7 @@ button:hover .head-btn1::after {
     }
 }
 
-.nft-btn button {
-    /*nft section button*/
-    display: inline-block;
-    position: relative;
-    background: none;
-    /* border: 1px solid #14c2a3; */
-    color: #fff;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    background: #14c2a3;
-    transition: all 0.5s;
-}
-
-.nft-btn button:hover {
-    color: #14c2a3;
-    background: #fff;
-}
-
-.nft-btn button span {
-    font-weight: 600;
-}
-
-.video {
-    /*nft btn-2 button*/
-    margin-left: 5px;
-    padding: 10px 15px;
-    background-color: transparent !important;
-    border: 1px solid #14c2a3;
-}
-
-.video:hover {
-    background-color: #14c2a3 !important;
-    color: #fff !important;
-}
-
 // =====================section one content ==================
-
 // section about us start  =======
 .about-us {
     padding: 50px 0;
@@ -438,6 +544,7 @@ button:hover .head-btn1::after {
             padding-top: 20px;
             position: relative;
 
+
             .icons {
                 width: 60px;
                 height: 60px;
@@ -450,10 +557,11 @@ button:hover .head-btn1::after {
                 z-index: 2;
                 cursor: pointer;
                 position: relative;
+                
 
-                :hover {
+                &:hover {
                     box-shadow: 2px 2px 20px 0px $primary-color;
-                    // transform: translatey(2px);
+                   
                 }
 
                 span {
@@ -468,7 +576,7 @@ button:hover .head-btn1::after {
                     z-index: 2;
 
 
-                    :hover {
+                    &:hover {
                         box-shadow: none;
 
                     }
@@ -477,85 +585,11 @@ button:hover .head-btn1::after {
                         font-size: 30px;
                         color: $white-color;
                     }
+                    @include bf-hover;
                 }
-
-                span::after {
-                    position: absolute;
-                    content: '';
-                    box-sizing: border-box;
-                    width: 15%;
-                    height: 15%;
-                    top: 0;
-                    right: 0;
-                    border-top: 2px solid $border-1-color;
-                    border-right: 2px solid $border-1-color;
-                    transition: all 1s;
-                    z-index: 1;
-                }
-
-                span::before {
-                    position: absolute;
-                    content: '';
-                    box-sizing: border-box;
-                    width: 15%;
-                    height: 15%;
-                    bottom: 0;
-                    left: 0;
-                    border-bottom: 2px solid $border-1-color;
-                    border-left: 2px solid $border-1-color;
-                    transition: all 1s;
-                    z-index: 1;
-                }
-
-                span:hover::after,
-                span:hover::before {
-                    width: 50%;
-                    height: 50%;
-                    border-color: $primary-color;
-
-                }
+                @include af-hover;
             }
-
         }
-
-        .icons::after {
-            position: absolute;
-            content: '';
-            box-sizing: border-box;
-            width: 15%;
-            height: 15%;
-            bottom: 0;
-            right: 0;
-            border-bottom: 2px solid $border-1-color;
-            border-right: 2px solid $border-1-color;
-            transition: all 1s;
-            z-index: 1;
-        }
-
-        .icons::before {
-            position: absolute;
-            content: '';
-            box-sizing: border-box;
-            width: 15%;
-            height: 15%;
-            top: 0;
-            left: 0;
-            border-top: 2px solid $border-1-color;
-            border-left: 2px solid $border-1-color;
-            transition: all 1s;
-            z-index: 1;
-        }
-
-        .iclass:hover::after,
-        .iclass:hover::before,
-        .icons:hover::after,
-        .icons:hover::before {
-            width: 50%;
-            height: 50%;
-            border-color: $primary-color;
-
-        }
-
     }
 
     .about-content {
@@ -570,14 +604,14 @@ button:hover .head-btn1::after {
             :hover {
                 box-shadow: 2px 2px 20px 0px $primary-color;
             }
-
+            @include af-hover;
             .content-two {
                 transition: all 2s;
                 position: relative;
                 padding: 10px 15px;
                 z-index: 2;
                 margin: 20px 0;
-
+                @include bf-hover;
                 :hover {
                     box-shadow: none;
 
@@ -593,83 +627,12 @@ button:hover .head-btn1::after {
                     font-family: $ibm;
                     color: $text-color;
                 }
+               
             }
-
-            .content-two::after {
-                position: absolute;
-                content: '';
-                // box-sizing: border-box;
-                width: 5%;
-                height: 20%;
-                bottom: 0;
-                right: 0;
-                border-bottom: 2px solid $border-1-color;
-                border-right: 2px solid $border-1-color;
-                transition: all 1s;
-                z-index: 1;
-            }
-
-            .content-two::before {
-                position: absolute;
-                content: '';
-                box-sizing: border-box;
-                width: 5%;
-                height: 20%;
-                top: 0;
-                left: 0;
-                border-top: 2px solid $border-1-color;
-                border-left: 2px solid $border-1-color;
-                transition: all 1s;
-                z-index: 1;
-            }
-
-            .content-two:hover::after,
-            .content-two:hover::before {
-                width: 50%;
-                height: 50%;
-                border-color: $primary-color;
-            }
-
-        }
-
-        .content-one::after {
-            position: absolute;
-            content: '';
-            box-sizing: border-box;
-            width: 5%;
-            height: 20%;
-            top: 0;
-            right: 0;
-            border-top: 2px solid $border-1-color;
-            border-right: 2px solid $border-1-color;
-            transition: all 1s;
-            z-index: 1;
-        }
-
-        .content-one::before {
-            position: absolute;
-            content: '';
-            box-sizing: border-box;
-            width: 5%;
-            height: 20%;
-            bottom: 0;
-            left: 0;
-            border-bottom: 2px solid $border-1-color;
-            border-left: 2px solid $border-1-color;
-            transition: all 1s;
-            z-index: 1;
-        }
-
-        .content-one:hover::after,
-        .content-one:hover::before {
-            width: 50%;
-            height: 50%;
-            border-color: $primary-color;
-
         }
     }
-
 }
+
 // section about us end  =======
 // slider scss in other file =========
 // road map start =====
@@ -677,6 +640,14 @@ button:hover .head-btn1::after {
     background-image: url('../img/bg-timeline.png');
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x:visible;
+    scrollbar-width: thin;
+    scrollbar-color: transparent;
+    &::-webkit-scrollbar{
+        display: none;;
+    }
 
     .road-top {
         p {
@@ -688,58 +659,46 @@ button:hover .head-btn1::after {
     }
 
     .road-bg {
+     
         .roadmap-bar {
-            overflow: auto;
+            position: relative;
             height: 100%;
+            margin: 0 auto;
+           
+            &::after {
+                position: absolute;
+                content: '';
+                width: 6px;
+                height: 100%;
+                top: 0;
+                background-color: $border-2-color;
+                left: 50%;
+                translate: transformx(-50%);
+                @media screen and (max-width:991px) {
+                    left: 0px;
+                }
+            }
+            #right-road{
+                display: flex;
+                justify-content: end;
+                margin-bottom: 150px;
+                @media screen and (max-width:991px) {
+                    justify-content: flex-start;;
+                }
 
+            }
             .road-map2 {
                 // height: 100vh;
-                position: relative;
-                overflow: auto;
                 margin: 10px 0;
                 display: flex;
                 flex-wrap: wrap;
                 align-items: center;
                 justify-content: space-between;
-                margin: 0 auto;
-
-
-
-
-                &::after {
-                    position: absolute;
-                    content: '';
-                    width: 6px;
-                    height: 100%;
-                    top: 0;
-                    background-color: $border-2-color;
-                    left: 50%;
-                    translate: transformx(-50%);
-
-                    @media screen and (max-width:991px) {
-                        left: 0px;
-                    }
-                }
-
-                //  &::before {
-                //     width: 6px;
-                //     height: 124%;
-                //     position: absolute;
-                //     top: 46%;
-                //     left: 49.8%;
-                //     content: "";
-                //     z-index: 1;
-                //   }
-                // =========================
-                #rm-b0 {
-                    margin-top: 200px;
-                }
-
                 .rm-box0 {
                     position: relative;
                     // padding: 10px;
                     z-index: 1;
-                    margin: 20px 0 0 0;
+                    margin: 120px 0 0 0;
                     background-color: $box-bg-color;
 
                     @media screen and (max-width:991px) {
@@ -774,13 +733,13 @@ button:hover .head-btn1::after {
                             content: '';
                             box-sizing: border-box;
                             width: 5%;
-                            height: 50%;
+                            height: 100%;
                             top: 0;
                             right: 0;
                             border-top: 2px solid $border-1-color;
                             border-right: 2px solid $border-1-color;
                             transition: all 1s;
-                            z-index: 3;
+                            z-index: 9999999;
                         }
 
                         &::before {
@@ -788,13 +747,13 @@ button:hover .head-btn1::after {
                             content: '';
                             box-sizing: border-box;
                             width: 5%;
-                            height: 50%;
+                            height: 100%;
                             bottom: 0;
                             left: 0;
                             border-bottom: 2px solid $border-1-color;
                             border-left: 2px solid $border-1-color;
                             transition: all 1s;
-                            z-index: 3;
+                            z-index: 9999999;
                         }
 
                         &:hover::after,
@@ -822,17 +781,16 @@ button:hover .head-btn1::after {
 
                                 @media screen and (min-width:1400px) {
                                     left: 630px;
-
                                 }
 
                                 @media screen and (max-width:1390px) {
                                     left: 545px;
-
                                 }
-
+                                @media screen and (max-width:1177px) {
+                                    left: 450px;
+                                }
                                 @media screen and (max-width:1170px) {
                                     left: 450px;
-
                                 }
 
                                 @media screen and (max-width:991px) {
@@ -860,10 +818,13 @@ button:hover .head-btn1::after {
                                     left: 390px;
                                     width: 160px;
                                 }
-
-                                @media screen and (max-width:1170px) {
-                                    left: 400px;
-                                    width: 60px;
+                                @media screen and (max-width:1177px) {
+                                    left: 390px;
+                                    width: 80px;
+                                }
+                                @media screen and (max-width:1173px) {
+                                    left: 390px;
+                                    width: 80px;
                                 }
 
                                 @media screen and (max-width:991px) {
@@ -903,7 +864,9 @@ button:hover .head-btn1::after {
                                 @media screen and (max-width:1400px) {
                                     left: -170px;
                                 }
-
+                                @media screen and (max-width:1177px) {
+                                    left: -85px;
+                                }
                                 @media screen and (max-width:1170px) {
                                     left: -85px;
                                 }
@@ -927,7 +890,10 @@ button:hover .head-btn1::after {
                                     left: -170px;
                                     width: 42%;
                                 }
-
+                                @media screen and (max-width:1177px) {
+                                    left: -85px;
+                                    width: 21%;
+                                }
                                 @media screen and (max-width:1170px) {
                                     left: -85px;
                                     width: 21%;
@@ -959,13 +925,13 @@ button:hover .head-btn1::after {
                         content: '';
                         box-sizing: border-box;
                         width: 5%;
-                        height: 50%;
+                        height: 100%;
                         top: 0;
                         left: 0;
                         border-top: 2px solid $border-1-color;
                         border-left: 2px solid $border-1-color;
                         transition: all 1s;
-                        z-index: 2;
+                        z-index: 3;
                     }
 
                     &::before {
@@ -973,7 +939,7 @@ button:hover .head-btn1::after {
                         content: '';
                         box-sizing: border-box;
                         width: 5%;
-                        height: 50%;
+                        height: 100%;
                         bottom: 0;
                         right: 0;
                         border-bottom: 2px solid $border-1-color;
@@ -995,12 +961,11 @@ button:hover .head-btn1::after {
     }
 
 }
-
 // ================================
 
-::-webkit-scrollbar {
-    display: none;
-}
+// ::-webkit-scrollbar {
+//     display: auto;
+// }
 
 // road map end =======
 // working section start
@@ -1035,21 +1000,20 @@ button:hover .head-btn1::after {
         cursor: pointer;
         position: relative;
         z-index: 2;
+        @include af-hover;
 
         :hover {
             box-shadow: 3px 3px 20px 0px $primary-color;
         }
-
         .setup-2 {
             transition: all 2s;
             position: relative;
             padding: 20px 15px;
             margin: 10px 0;
             z-index: 2;
-
+            @include bf-hover;
             :hover {
                 box-shadow: none;
-
             }
 
             h3 {
@@ -1072,85 +1036,13 @@ button:hover .head-btn1::after {
             }
         }
 
-        .setup-2::after {
-            position: absolute;
-            content: '';
-            box-sizing: border-box;
-            width: 15%;
-            height: 15%;
-            bottom: 0;
-            right: 0;
-            border-bottom: 2px solid $border-1-color;
-            border-right: 2px solid $border-1-color;
-            transition: all 1s;
-            z-index: 1;
-        }
-
-        .setup-2::before {
-            position: absolute;
-            content: '';
-            box-sizing: border-box;
-            width: 15%;
-            height: 15%;
-            top: 0;
-            left: 0;
-            border-top: 2px solid $border-1-color;
-            border-left: 2px solid $border-1-color;
-            transition: all 1s;
-            z-index: 1;
-        }
-
-        .setup-2:hover::after,
-        .setup-2:hover::before {
-            width: 50%;
-            height: 50%;
-            border-color: $primary-color;
-        }
     }
-
-    .setup-1::after {
-        position: absolute;
-        content: '';
-        box-sizing: border-box;
-        width: 15%;
-        height: 15%;
-        top: 0;
-        right: 0;
-        border-top: 2px solid $border-1-color;
-        border-right: 2px solid $border-1-color;
-        transition: all 1s;
-        z-index: 1;
-    }
-
-    .setup-1::before {
-        position: absolute;
-        content: '';
-        box-sizing: border-box;
-        width: 15%;
-        height: 15%;
-        bottom: 0;
-        left: 0;
-        border-bottom: 2px solid $border-1-color;
-        border-left: 2px solid $border-1-color;
-        transition: all 1s;
-        z-index: 1;
-    }
-
-    .setup-1:hover::after,
-    .setup-1:hover::before {
-        width: 50%;
-        height: 50%;
-        border-color: $primary-color;
-    }
-
 }
-
 // working section end 
 // oure team member section star 
 .our-team {
     background-color: $header-bg;
     padding: 50px 0;
-
     .team {
         .team-member {
             span {
@@ -1158,28 +1050,23 @@ button:hover .head-btn1::after {
                 font-weight: 600;
                 font-family: $ibm;
             }
-
             h1 {
                 font-weight: 600;
                 font-size: $fs-44;
             }
         }
-
         .team-member2 {
             span {
                 font-weight: 600;
                 font-size: $fs-30;
             }
-
             p {
                 color: $text-color;
                 font-family: $ibm;
             }
         }
-
     }
 }
-
 // oure team member section end
 // blog news section start
 .blog {
@@ -1195,38 +1082,37 @@ button:hover .head-btn1::after {
             font-weight: $fw-600;
         }
     }
-
     .news {
-
         .img-1 {
-            width: 95%;
-            height: 550px;
-            background-image: url('../img/post-7-450x580.jpg');
+            width: 95%;   
+            margin: 0 10px;
             background-repeat: no-repeat;
             background-size: cover;
             border: 1px solid $border-1-color;
             margin: 0 10px;
-            transition: all 0.5s;
-            overflow: hidden;
-
+            .bg-img{
+                z-index: -111;
+                transition: all 0.5s;
+               &:hover{
+                transform: scale(1.09);
+               }
+            }
             button {
                 background-color: $primary-color;
                 margin: 10px 15px;
                 color: $white-color;
                 border: 1px solid transparent;
+                z-index: 999999;
             }
-
-            .content01 {
+           .content01 {
                 backdrop-filter: blur(30px);
                 margin: 300px 0 0 0px;
-
                 span {
                     font-family: $ibm;
                     font-size: $fs-14;
                     // color: $text-color;
                     padding: 0 10px;
                 }
-
                 h3 {
                     font-size: $fs-36;
                     font-weight: $fw-600;
@@ -1235,6 +1121,9 @@ button:hover .head-btn1::after {
 
                     @media screen and (max-width:991px) {
                         font-size: 20px;
+                    }
+                     @media screen and (max-width:575PX) {
+                        font-size: 14PX;
                     }
 
                     &:hover {
@@ -1248,113 +1137,12 @@ button:hover .head-btn1::after {
                     padding: 0 10px 30px;
                 }
             }
-
-            &:hover {
-                transform: scale(1.03);
-            }
-        }
-
-        #img2 {
-            background-image: url('../img/post-8-450x580.jpg');
-        }
-
-        // box-shadow: 0 0 5px 0 ;
-        // background: inherit;
-        // backdrop-filter: blur(10px);
-        // <!--margin: 100px; according to your need-->
-        #img3 {
-            background-image: url('../img/post-5-450x580.jpg');
         }
     }
-
     .end-btn {
-
-
-        button {
-            display: inline-block;
-            position: relative;
-            background: transparent;
-            border: 1px solid $primary-color;
-            color: #fff;
-            font-size: 18px;
-            cursor: pointer;
-
-            // margin: 20px 30px;
-            // background: rgba(0,0,0,0.09);
-            .head-btn1 {
-                display: block;
-                padding: 15px 20px;
-
-                &::before,
-                &::after {
-                    content: "";
-                    width: 0px;
-                    height: 2px;
-                    position: absolute;
-                    border: 1px solid white;
-                    transition: all 0.2s linear;
-                    // background: #fff;
-                }
-            }
-
-            &::before,
-            &::after {
-                content: "";
-                width: 0;
-                height: 2px;
-                position: absolute;
-                transition: all 0.2s linear;
-                background: #fff;
-            }
-        }
-
-        :hover::before,
-        :hover::after {
-            width: 100%;
-        }
-
-
-        button:hover .head-btn1::before,
-        button:hover .head-btn1::after {
-            height: 100%;
-        }
-
-        .btn-6::before {
-            left: 50%;
-            top: 0;
-            transition-duration: 0.4s;
-        }
-
-        .btn-6::after {
-            left: 50%;
-            bottom: 0;
-            transition-duration: 0.4s;
-        }
-
-        .btn-6 .head-btn1::before {
-            left: 0;
-            top: 50%;
-            transition-duration: 0.4s;
-        }
-
-        .btn-6 .head-btn1::after {
-            right: 0;
-            top: 50%;
-            transition-duration: 0.4s;
-        }
-
-        .btn-6:hover::before,
-        .btn-6:hover::after {
-            left: 0;
-        }
-
-        .btn-6:hover .head-btn1::before,
-        .btn-6:hover .head-btn1::after {
-            top: 0;
-        }
+        @include btn-6;
     }
 }
-
 // blog news section end
 //partner section start 
 .partner {
@@ -1385,7 +1173,6 @@ button:hover .head-btn1::after {
         }
     }
 }
-
 // partner section end 
 // faq section start 
 .faqs {
@@ -1415,109 +1202,104 @@ button:hover .head-btn1::after {
         -moz-border-radius: 4px;
         border-radius: 4px;
         padding: 10px 0;
-
-        // ===============================
-        .test-2 {
-            transition: all 2s;
-            position: relative;
-            z-index: 2;
-            // margin: 20px 0;
-
-            &:hover {
-                box-shadow: 2px 2px 10px $primary-color;
-
-            }
-
-            &::after {
-                position: absolute;
-                content: '';
-                // box-sizing: border-box;
-                width: 5%;
-                height: 20%;
-                bottom: 0;
-                right: 0;
-                border-bottom: 2px solid $border-1-color;
-                border-right: 2px solid $border-1-color;
-                transition: all 1s;
-                z-index: 3;
-            }
-
-            &::before {
-                position: absolute;
-                content: '';
-                box-sizing: border-box;
-                width: 5%;
-                height: 20%;
-                top: 0;
-                left: 0;
-                border-top: 2px solid $border-1-color;
-                border-left: 2px solid $border-1-color;
-                transition: all 1s;
-                z-index: 9999;
-            }
-
-            &:hover::after,
-            &:hover::before {
-                width: 50%;
-                height: 50%;
-                border-color: $primary-color;
-            }
-
+        z-index: 1;
+        // ===============================         
             .accordion-item {
                 margin: 20px 0;
+                // padding: 10px;
                 background-color: $box-bg-color;
                 transition: all 1s;
-                z-index: 2;
+                z-index: 9999999999999999999999999;
                 cursor: pointer;
                 position: relative;
-
-                h2 {
-                    button {
-                        padding: 15px 10px;
-                        font-size: $fs-24;
-                        color: $white-color;
-                        border: 1px solid transparent;
-                        background-color: $box-bg-color;
-                    }
+                &:hover {
+                    box-shadow: 2px 2px 10px $primary-color;
                 }
-
                 &::after {
                     position: absolute;
                     content: '';
                     box-sizing: border-box;
-                    width: 5%;
-                    height: 20%;
+                    width: 15px;
+                    height: 15px;
                     top: 0;
                     right: 0;
                     border-top: 2px solid $border-1-color;
                     border-right: 2px solid $border-1-color;
                     transition: all 1s;
-                    z-index: 3;
+                    z-index: 1;
                 }
-
                 &::before {
                     position: absolute;
                     content: '';
                     box-sizing: border-box;
-                    width: 5%;
-                    height: 20%;
+                    width: 15px;
+                    height: 15px;
                     bottom: 0;
                     left: 0;
                     border-bottom: 2px solid $border-1-color;
                     border-left: 2px solid $border-1-color;
                     transition: all 1s;
-                    z-index: 3;
+                    z-index: 1;
                 }
-
                 &:hover::after,
                 &:hover::before {
-                    width: 50%;
-                    height: 50%;
-                    border-color: $primary-color;
-
-                }
+                width: 50%;
+                height: 50%;
+                border-color: $primary-color;
+            
             }
-
+                .testing{
+                    position: relative;
+                    &::after {
+                        position: absolute;
+                        content: '';
+                        box-sizing: border-box;
+                        width: 15px;
+                        height: 15px;
+                        bottom: 0;
+                        right: 0;
+                        border-bottom: 2px solid $border-1-color;
+                        border-right: 2px solid $border-1-color;
+                        transition: all 1s;
+                        z-index: 1;
+                    }
+                
+                    &::before {
+                        position: absolute;
+                        content: '';
+                        box-sizing: border-box;
+                        width: 15px;
+                        height: 15px;
+                        top: 0;
+                        left: 0;
+                        border-top: 2px solid $border-1-color;
+                        border-left: 2px solid $border-1-color;
+                        transition: all 1s;
+                        z-index: 1;
+                    }
+                
+                    &:hover::after,
+                    &:hover::before{
+                        width: 50%;
+                        height: 50%;
+                        border-color: $primary-color;
+                
+                    }
+                }
+                h2 {
+                    button {
+                        // padding: 15px 10px;
+                        font-size: $fs-24;
+                        color: $white-color;
+                        border: 1px solid transparent;
+                        background-color: transparent;
+                        z-index: 2;
+                        :focus{
+                            border:none;
+                        }
+                    }
+                }        
+            }
             .accordion-collapse {
                 .accordion-body {
                     background-color: $box-bg-color;
@@ -1528,12 +1310,7 @@ button:hover .head-btn1::after {
                 }
             }
         }
-    }
-}
-
-
-
-// ===============================
+       }
 // faq section End
 // foter section start
 .bottom {
@@ -1604,20 +1381,24 @@ button:hover .head-btn1::after {
         }
     }
 }
-
 // foter section end
 footer {
     .data {
+        padding: 5px 0;
         .left1 {
             p {
                 font-size: $fs-17;
-                padding: 10px 0;
+                margin: 0;
+                line-height: 2;
                 color: $text-color;
+
             }
         }
 
         .right1 {
             ul {
+                margin: 0;
+                line-height: 2;
 
                 li {
                     padding: 0 5px;
@@ -1642,54 +1423,52 @@ footer {
         }
     }
 }
-
 #button {
     display: inline-block;
     background-color: white;
     width: 50px;
     height: 50px;
     text-align: center;
-    border-radius: 50%;
+    // border-radius: 50%;
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 40px;
+    right: 0px;
     transition: background-color .3s,
-        opacity .5s, visibility .5s;
+    opacity .5s, visibility .5s;
     opacity: 0;
     visibility: hidden;
     z-index: 1000;
 }
-
+#button i{
+    font-size: 20px;
+  text-align: center;
+    padding: 15px 10px;
+}
 #button::after {
-    content: "\f077";
+    content: "";
     font-family: FontAwesome;
     font-weight: normal;
     font-style: normal;
     font-size: 2em;
-    line-height: 50px;
+    // line-height: 50px;
     // color: black;
 }
-
 #button:hover {
     cursor: pointer;
     background-color: $primary-color;
     color: white;
 }
-
 #button.show {
     opacity: 1;
     visibility: visible;
 }
-
 /* Styles for the content section */
-
-
 @media (min-width: 500px) {
     .content {
         width: 43%;
     }
 
     #button {
-        margin: 30px;
+        // margin: 30px;
     }
 }
